@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter/widgets/sizebox.dart';
 import 'package:learn_flutter/widgets/switch.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MySwitch(),
+      home: SizeBox(),
     );
   }
 }
