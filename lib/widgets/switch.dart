@@ -14,7 +14,7 @@ class _MySwitchState extends State<MySwitch> {
     return Scaffold(
         appBar: AppBar(title: const Text("switch")),
         body: Container(
-            constraints: BoxConstraints.expand(),
+            constraints: const BoxConstraints.expand(),
             color: value ? Colors.red : Colors.green,
             child: Switch(
               onChanged: (bool v) {
