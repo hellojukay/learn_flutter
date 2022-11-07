@@ -105,53 +105,57 @@ class _HomePage extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: DataTable(
-        columns: const [
-          DataColumn(label: Text("ID")),
-          DataColumn(label: Text("名字")),
-          DataColumn(label: Text("年龄")),
-          DataColumn(label: Text("性别")),
-          DataColumn(label: Text("编辑")),
-          DataColumn(label: Text("删除"))
-        ],
-        rows: widget.data
-            .map((e) => DataRow(
-                    cells: [
-                  DataCell(Text(e.id.toString())),
-                  DataCell(Text(e.name)),
-                  DataCell(Container(
-                    width: 100,
-                    decoration: e.age > 90
-                        ? const BoxDecoration(color: Colors.red)
-                        : null,
-                    child: Center(child: Text(e.age.toString())),
-                  )),
-                  DataCell(e.male ? const Text("男性") : const Text("女性")),
-                  DataCell(IconButton(
-                      onPressed: () async {
-                        Person p = await edit(context, e);
-                        setState(() {
-                          for (var i = 0; i > widget.data.length; i++) {
-                            if (widget.data[i].id == p.id) {
-                              widget.data[i] = p;
-                              break;
+    return Container(
+      height: 600,
+      width: 400,
+      child: SingleChildScrollView(
+        child: DataTable(
+          columns: const [
+            DataColumn(label: Text("ID")),
+            DataColumn(label: Text("名字")),
+            DataColumn(label: Text("年龄")),
+            DataColumn(label: Text("性别")),
+            DataColumn(label: Text("编辑")),
+            DataColumn(label: Text("删除"))
+          ],
+          rows: widget.data
+              .map((e) => DataRow(
+                      cells: [
+                    DataCell(Text(e.id.toString())),
+                    DataCell(Text(e.name)),
+                    DataCell(Container(
+                      width: 100,
+                      decoration: e.age > 90
+                          ? const BoxDecoration(color: Colors.red)
+                          : null,
+                      child: Center(child: Text(e.age.toString())),
+                    )),
+                    DataCell(e.male ? const Text("男性") : const Text("女性")),
+                    DataCell(IconButton(
+                        onPressed: () async {
+                          Person p = await edit(context, e);
+                          setState(() {
+                            for (var i = 0; i > widget.data.length; i++) {
+                              if (widget.data[i].id == p.id) {
+                                widget.data[i] = p;
+                                break;
+                              }
                             }
-                          }
-                        });
-                      },
-                      icon: const Icon(Icons.edit))),
-                  DataCell(IconButton(
-                      onPressed: () {
-                        setState(() {
-                          widget.data = widget.data
-                              .where((element) => element.id != e.id)
-                              .toList();
-                        });
-                      },
-                      icon: const Icon(Icons.delete)))
-                ].toList()))
-            .toList(),
+                          });
+                        },
+                        icon: const Icon(Icons.edit))),
+                    DataCell(IconButton(
+                        onPressed: () {
+                          setState(() {
+                            widget.data = widget.data
+                                .where((element) => element.id != e.id)
+                                .toList();
+                          });
+                        },
+                        icon: const Icon(Icons.delete)))
+                  ].toList()))
+              .toList(),
+        ),
       ),
     );
   }
